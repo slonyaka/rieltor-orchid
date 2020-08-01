@@ -17,10 +17,10 @@ class CreateObjectsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
-	        $table->text('description');
-	        $table->text('image');
-	        $table->string('address');
-	        $table->float('price');
+	        $table->text('description')->nullable();
+	        $table->text('image')->nullable();
+	        $table->string('address')->nullable();
+	        $table->float('price')->nullable();
 	        $table->integer('views')->nullable();
 	        $table->integer('room_count')->nullable();
 	        $table->integer('floor')->nullable();

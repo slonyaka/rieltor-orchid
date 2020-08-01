@@ -2,8 +2,11 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\ObjectImage;
 use App\Models\ObjectType;
 use App\Models\RieltorObject;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Input;
@@ -13,6 +16,7 @@ use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Toast;
 
 class RieltorObjectEditScreen extends Screen
 {
@@ -62,6 +66,7 @@ class RieltorObjectEditScreen extends Screen
 	              ->method('save'),
 
 	        Button::make(__('Remove'))
+		          ->canSee($this->exists)
 	              ->icon('icon-trash')
 	              ->confirm('Are you sure you want to delete the user?')
 	              ->method('remove'),
@@ -87,6 +92,7 @@ class RieltorObjectEditScreen extends Screen
 			              ObjectType::GROUND_PLOT => ObjectType::getName(ObjectType::GROUND_PLOT),
 			              ObjectType::GARAGE => ObjectType::getName(ObjectType::GARAGE),
 		              ])
+		              ->required()
 		              ->title(__('Object type')),
 
 		        Input::make('object.name')
@@ -109,7 +115,6 @@ class RieltorObjectEditScreen extends Screen
 		        Input::make('object.address')
 		             ->type('text')
 		             ->max(255)
-		             ->required()
 		             ->title(__('Address'))
 		             ->placeholder(__('Address')),
 
@@ -117,7 +122,6 @@ class RieltorObjectEditScreen extends Screen
 		             ->type('number')
 			         ->min(0)
 		             ->max(10000000)
-		             ->required()
 		             ->title(__('Price'))
 		             ->placeholder(__('Price')),
 
@@ -125,7 +129,6 @@ class RieltorObjectEditScreen extends Screen
 		             ->type('number')
 		             ->min(0)
 		             ->max(1000)
-		             ->required()
 		             ->title(__('Room count'))
 		             ->placeholder(__('Room count')),
 
@@ -133,7 +136,6 @@ class RieltorObjectEditScreen extends Screen
 		             ->type('number')
 		             ->min(0)
 		             ->max(1000)
-		             ->required()
 		             ->title(__('Floor'))
 		             ->placeholder(__('Floor')),
 
@@ -142,7 +144,6 @@ class RieltorObjectEditScreen extends Screen
 		             ->min(0)
 			         ->step(0.1)
 		             ->max(1000000)
-		             ->required()
 		             ->title(__('Full square'))
 		             ->placeholder(__('Full square')),
 
@@ -151,7 +152,6 @@ class RieltorObjectEditScreen extends Screen
 		             ->min(0)
 		             ->step(0.1)
 		             ->max(1000000)
-		             ->required()
 		             ->title(__('Living space square'))
 		             ->placeholder(__('Living space square')),
 
@@ -160,20 +160,59 @@ class RieltorObjectEditScreen extends Screen
 		             ->min(0)
 		             ->step(0.1)
 		             ->max(1000000)
-		             ->required()
 		             ->title(__('Kitchen square'))
 		             ->placeholder(__('Kitchen square')),
 	        ])
         ];
     }
 
-    public function save()
+    public function save(RieltorObject $rieltorObject, Request $request)
     {
 
+    	$request->validate([
+    		'object.name' => 'required',
+		    'object.type_id' => 'required|digits_between:'. ObjectType::APARTMENT .','. ObjectType::GARAGE,
+		    'object.floor' => 'integer|nullable',
+		    'object.room_count' => 'integer|nullable',
+		    'object.square_full' => 'numeric|nullable',
+		    'object.square_live' => 'numeric|nullable',
+		    'object.square_kitchen' => 'numeric|nullable',
+	    ]);
+
+    	$objectData = $request->get('object');
+
+
+	    $rieltorObject->fill(array_merge($objectData, ['user_id' => Auth::user()->id]));
+	    $rieltorObject->save();
+
+	    if (!empty($objectData['images'])) {
+
+	    	ObjectImage::where('object_id', $rieltorObject->id)->delete();
+
+	    	foreach ($objectData['images'] as $image) {
+
+				$objectImage = new ObjectImage();
+
+			    $objectImage->fill([
+			    	'object_id' => $rieltorObject->id,
+				    'path' => $image[0]
+			    ]);
+
+			    $objectImage->save();
+		    }
+	    }
+
+	    Toast::info(__('Object was saved.'));
+
+	    return redirect()->route('platform.rieltor');
     }
 
-    public function remove()
-    {
+	public function remove(RieltorObject $rieltorObject)
+	{
+		$rieltorObject->delete();
 
-    }
+		Toast::info(__('Object was removed'));
+
+		return redirect()->route('platform.rieltor');
+	}
 }

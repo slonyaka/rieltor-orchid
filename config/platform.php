@@ -129,8 +129,8 @@ return [
     */
 
     'template' => [
-        'header' => null,
-        'footer' => null,
+        'header' => 'header',
+        'footer' => 'footer',
     ],
 
     /*

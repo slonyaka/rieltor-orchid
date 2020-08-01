@@ -34,7 +34,8 @@ class LoginController extends Controller
      * @return void
      */
     public function __construct()
-    {   $this->redirectTo = route('platform.rieltor');
+    {
+    	$this->redirectTo = route('platform.rieltor');
         $this->middleware('guest')->except('logout');
     }
 }

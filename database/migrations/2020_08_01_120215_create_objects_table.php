@@ -15,7 +15,19 @@ class CreateObjectsTable extends Migration
     {
         Schema::create('objects', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            $table->string('name');
+	        $table->text('description');
+	        $table->string('address');
+	        $table->float('price');
+	        $table->integer('views');
+	        $table->integer('room_count');
+	        $table->integer('floor');
+	        $table->float('square_full');
+	        $table->float('square_live');
+	        $table->float('square_kitchen');
+	        $table->string('type_id');
+	        $table->timestamps();
         });
     }
 

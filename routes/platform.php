@@ -10,6 +10,7 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\RieltorObjectEditScreen;
 use App\Orchid\Screens\RieltorScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -51,3 +52,4 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 
 
 Route::screen('/rieltor', RieltorScreen::class)->name('platform.rieltor');
+Route::screen('/object/create', RieltorObjectEditScreen::class)->name('platform.object.create');

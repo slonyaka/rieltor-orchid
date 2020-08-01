@@ -105,7 +105,7 @@ class ExampleCardsScreen extends Screen
                  */
                 public function image(): ?string
                 {
-                    return null;
+                    return 'https://picsum.photos/600/300';
                 }
 
                 /**

@@ -2,6 +2,9 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\RieltorObject;
+use Illuminate\Support\Facades\Auth;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
 class RieltorScreen extends Screen
@@ -11,14 +14,14 @@ class RieltorScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Rieltor Screen';
+    public $name = 'My Objects';
 
     /**
      * Display header description.
      *
      * @var string
      */
-    public $description = 'Rieltor Screen';
+    public $description = 'List of my objects';
 
     /**
      * Query data.
@@ -28,7 +31,11 @@ class RieltorScreen extends Screen
     public function query(): array
     {
 
-        return [];
+    	$objects = RieltorObject::where('user_id', Auth::user()->id)->paginate();
+
+        return [
+        	'objects' => $objects
+        ];
     }
 
     /**
@@ -38,7 +45,11 @@ class RieltorScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+        	Link::make(__('Add'))
+	            ->href(route('platform.object.create'))
+		        ->icon('icon-plus')
+        ];
     }
 
     /**
@@ -48,6 +59,13 @@ class RieltorScreen extends Screen
      */
     public function layout(): array
     {
-        return [];
+    	if (!empty($this->query) && count($this->query->get('objects'))) {
+    		$layout = [
+
+		    ];
+	    } else {
+    		$layout = [];
+	    }
+        return $layout;
     }
 }

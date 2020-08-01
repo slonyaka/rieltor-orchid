@@ -2,5 +2,22 @@
   "Forgot Your Password?" : "Забыли пароль?",
   "Firstname" : "Имя",
   "Register" : "Регистрация",
-  "Rieltor" : "Риелтор"
+  "Rieltor" : "Риелтор",
+  "Object type" : "Тип объекта",
+  "Object description" : "Описание",
+  "Picture" : "Изображение",
+  "Additional pictures" : "Дополнительные изображения",
+  "Address" : "Адрес",
+  "Price" : "Цена",
+  "Room count" : "Количество комнат",
+  "Floor" : "Этаж",
+  "Full square" : "Полная площадь",
+  "Living space square" : "Жилая площадь",
+  "Kitchen square" : "Площадь кухни",
+  "Apartment" : "Квартира",
+  "House" : "Дом",
+  "Office" : "Оффис",
+  "Commercial" : "Коммерческая недвижимость",
+  "Ground Plot" : "Земельный участок",
+  "Garage" : "Гараж"
 }

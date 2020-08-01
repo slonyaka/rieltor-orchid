@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Object extends Model
+class RieltorObject extends Model
 {
-    //
+    protected $table = 'objects';
 }

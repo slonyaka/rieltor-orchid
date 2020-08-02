@@ -5,6 +5,7 @@ namespace App\Orchid\Screens;
 use App\Models\ObjectImage;
 use App\Models\ObjectType;
 use App\Models\RieltorObject;
+use App\Models\UrlAlias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Button;
@@ -43,8 +44,14 @@ class RieltorObjectEditScreen extends Screen
     public function query(RieltorObject $object): array
     {
         $this->exists = $object->exists;
+
+        if ($this->exists) {
+        	$urlAlias = UrlAlias::where(['model' => RieltorObject::class, 'entity_id' => $object->id])->first();
+        }
+
         return [
-        	'object' => $object
+        	'object' => $object,
+	        'url_alias' => $urlAlias->keyword ?? ''
         ];
     }
 
@@ -68,7 +75,7 @@ class RieltorObjectEditScreen extends Screen
 	        Button::make(__('Remove'))
 		          ->canSee($this->exists)
 	              ->icon('icon-trash')
-	              ->confirm('Are you sure you want to delete the user?')
+	              ->confirm(__('Are you sure you want to delete the object?'))
 	              ->method('remove'),
         ];
     }
@@ -84,14 +91,7 @@ class RieltorObjectEditScreen extends Screen
         	Layout::rows([
 
 		        Select::make('object.type_id')
-		              ->options([
-			              ObjectType::APARTMENT => ObjectType::getName(ObjectType::APARTMENT),
-			              ObjectType::HOUSE => ObjectType::getName(ObjectType::HOUSE),
-			              ObjectType::OFFICE => ObjectType::getName(ObjectType::OFFICE),
-			              ObjectType::COMMERCIAL => ObjectType::getName(ObjectType::COMMERCIAL),
-			              ObjectType::GROUND_PLOT => ObjectType::getName(ObjectType::GROUND_PLOT),
-			              ObjectType::GARAGE => ObjectType::getName(ObjectType::GARAGE),
-		              ])
+		              ->options(ObjectType::getList())
 		              ->required()
 		              ->title(__('Object type')),
 
@@ -110,7 +110,11 @@ class RieltorObjectEditScreen extends Screen
 		               ->title(__('Picture')),
 
 		        Upload::make('object.images.')
-		              ->title(__('Additional pictures')),
+			          ->maxFiles(4)
+			          ->maxFileSize(2)
+			          ->acceptedFiles('image/*')
+		              ->title(__('Additional pictures'))
+		              ->help('Filesize must be less then 2MB'),
 
 		        Input::make('object.address')
 		             ->type('text')
@@ -155,13 +159,17 @@ class RieltorObjectEditScreen extends Screen
 		             ->title(__('Living space square'))
 		             ->placeholder(__('Living space square')),
 
-		        Input::make('object.kitchen')
+		        Input::make('object.square_kitchen')
 		             ->type('number')
 		             ->min(0)
 		             ->step(0.1)
 		             ->max(1000000)
 		             ->title(__('Kitchen square'))
 		             ->placeholder(__('Kitchen square')),
+
+		        Input::make('url_alias')
+		             ->type('hidden')
+		             ->max(255),
 	        ])
         ];
     }
@@ -181,9 +189,10 @@ class RieltorObjectEditScreen extends Screen
 
     	$objectData = $request->get('object');
 
-
 	    $rieltorObject->fill(array_merge($objectData, ['user_id' => Auth::user()->id]));
 	    $rieltorObject->save();
+
+	    $this->saveSeoUrl($rieltorObject, $request);
 
 	    if (!empty($objectData['images'])) {
 
@@ -209,10 +218,39 @@ class RieltorObjectEditScreen extends Screen
 
 	public function remove(RieltorObject $rieltorObject)
 	{
+		ObjectImage::where('object_id', $rieltorObject->id)->delete();
+
 		$rieltorObject->delete();
 
-		Toast::info(__('Object was removed'));
+		Toast::info(__('Object was removed.'));
 
 		return redirect()->route('platform.rieltor');
+	}
+
+	private function saveSeoUrl(RieltorObject $rieltorObject, Request $request)
+	{
+
+		$objectData = $request->get('object');
+
+		if (!empty($request->get('seo_url'))) {
+			$keyword = $request->get('url_alias');
+		} else {
+			$keyword = UrlAlias::makeKeyword($objectData['name'] .'-'. $objectData['address']);
+	    }
+
+		if (UrlAlias::where('keyword', $keyword)->exists()) {
+			$keyword = $keyword .'-'. Auth::user()->id .'-'. time();
+		}
+
+		$data = [
+			'model' => RieltorObject::class,
+			'entity_id' => $rieltorObject->id,
+			'keyword' => $keyword
+		];
+
+		$urlAlias = UrlAlias::firstOrNew(['model' => $data['model'], 'entity_id' => $data['entity_id']]);
+
+		$urlAlias->fill($data);
+		$urlAlias->save();
 	}
 }

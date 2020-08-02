@@ -110,7 +110,9 @@ return [
     */
 
     'resource' => [
-        'stylesheets' => [],
+        'stylesheets' => [
+        	'/css/add.css'
+        ],
         'scripts'     => [],
     ],
 

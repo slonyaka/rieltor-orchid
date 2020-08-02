@@ -40,4 +40,16 @@ class ObjectType extends Model
 
 	    return $name;
     }
+
+    public static function getList()
+    {
+    	return [
+		    static::APARTMENT => static::getName(static::APARTMENT),
+		    static::HOUSE => static::getName(static::HOUSE),
+		    static::OFFICE => static::getName(static::OFFICE),
+		    static::COMMERCIAL => static::getName(static::COMMERCIAL),
+		    static::GROUND_PLOT => static::getName(static::GROUND_PLOT),
+		    static::GARAGE => static::getName(static::GARAGE),
+	    ];
+    }
 }

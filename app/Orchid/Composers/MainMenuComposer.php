@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Composers;
 
+use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\Menu;
@@ -30,19 +31,6 @@ class MainMenuComposer
      */
     public function compose()
     {
-        // Profile
-//        $this->dashboard->menu
-//            ->add(Menu::PROFILE,
-//                ItemMenu::label('Action')
-//                    ->icon('icon-compass')
-//                    ->badge(function () {
-//                        return 6;
-//                    })
-//            )
-//            ->add(Menu::PROFILE,
-//                ItemMenu::label('Another action')
-//                    ->icon('icon-heart')
-//            );
 
         // Main
         $this->dashboard->menu
@@ -54,7 +42,7 @@ class MainMenuComposer
 	        ->add(Menu::MAIN,
 		        ItemMenu::label('My settings')
 		                ->icon('icon-monitor')
-		                ->route('platform.example')
+		                ->route('platform.rieltor.account')
 
 	        );
     }

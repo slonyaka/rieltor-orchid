@@ -70,4 +70,9 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function meta()
+    {
+	    return $this->hasOne('App\Models\UserMeta');
+    }
 }

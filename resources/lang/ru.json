@@ -3,6 +3,7 @@
   "Firstname" : "Имя",
   "Register" : "Регистрация",
   "Rieltor" : "Риелтор",
+  "My objects" : "Мои объекты",
   "Object type" : "Тип объекта",
   "Object description" : "Описание",
   "Picture" : "Изображение",
@@ -20,5 +21,10 @@
   "Commercial" : "Коммерческая недвижимость",
   "Ground Plot" : "Земельный участок",
   "Garage" : "Гараж",
-  "Back" : "Назад"
+  "Back" : "Назад",
+  "Object was saved." : "Объект сохранен",
+  "Object was removed." : "Объект удален",
+  "Are you sure you want to delete the object?" : "Вы действительно хотите удалить этот объект?",
+  "View" : "Просмотреть",
+  "Get link" : "Получить ссылку"
 }

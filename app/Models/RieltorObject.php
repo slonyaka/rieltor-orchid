@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Orchid\Presenters\RieltorObjectPresenter;
 use Illuminate\Database\Eloquent\Model;
 
 class RieltorObject extends Model
@@ -22,4 +23,15 @@ class RieltorObject extends Model
 	    'square_kitchen',
 	    'type_id'
     ];
+
+    public function getUrlAlias()
+    {
+    	$slug = UrlAlias::where(['model' => static::class, 'entity_id' => $this->id])->pluck('keyword')->first();
+    	if (!empty($slug)) {
+		    return route('object.view', ['slug' => $slug]);
+	    }
+
+	    return '';
+
+    }
 }

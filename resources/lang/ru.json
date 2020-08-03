@@ -1,6 +1,7 @@
 {
   "Forgot Your Password?" : "Забыли пароль?",
   "Firstname" : "Имя",
+  "Lastname" : "Фамилия",
   "Register" : "Регистрация",
   "Rieltor" : "Риелтор",
   "My objects" : "Мои объекты",
@@ -26,5 +27,10 @@
   "Object was removed." : "Объект удален",
   "Are you sure you want to delete the object?" : "Вы действительно хотите удалить этот объект?",
   "View" : "Просмотреть",
-  "Get link" : "Получить ссылку"
+  "Get link" : "Получить ссылку",
+  "My account" : "Моя учетная запись",
+  "My settings" : "Мои настройки",
+  "Phone" : "Телефон",
+  "Company" : "Компания",
+  "Avatar" : "Аватар"
 }

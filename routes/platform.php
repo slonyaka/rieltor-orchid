@@ -10,6 +10,7 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\RieltorEditScreen;
 use App\Orchid\Screens\RieltorObjectEditScreen;
 use App\Orchid\Screens\RieltorScreen;
 use App\Orchid\Screens\RieltorSettings;
@@ -52,7 +53,7 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 
-Route::screen('/rieltor/{id}/edit', RieltorScreen::class)->name('platform.rieltor.edit');
+Route::screen('/rieltor/{id}/edit', RieltorEditScreen::class)->name('platform.rieltor.edit');
 Route::screen('/rieltor/account', RieltorSettings::class)->name('platform.rieltor.account');
 Route::screen('/objects', RieltorScreen::class)->name('platform.rieltor');
 Route::screen('/object/create', RieltorObjectEditScreen::class)->name('platform.object.create');

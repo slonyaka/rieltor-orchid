@@ -31,10 +31,20 @@ class RieltorSettings extends Screen
     public function query(): array
     {
     	$user = Auth::user();
-        return [
-        	'user' => $user,
-	        'meta' => $user->meta
-        ];
+
+    	$data = [
+    		'id' => $user->id,
+		    'email' => $user->email
+	    ];
+
+
+	    $data['full_name'] = ($user->meta) ? $user->meta->firstname .' '. $user->meta->lastname : $user->name;
+	    $data['phone'] = ($user->meta) ? $user->meta->phone : '';
+	    $data['company'] = ($user->meta) ? $user->meta->company : '';
+	    $data['address'] = ($user->meta) ? $user->meta->address : '';
+	    $data['avatar'] = ($user->meta) ? $user->meta->avatar : '';
+
+        return $data;
     }
 
     /**

@@ -38,4 +38,11 @@ class UrlAlias extends Model
 
 	    return trim(preg_replace('~[^-a-z0-9_]+~u', '-', mb_strtolower(strtr($name, $converter))), "-");
     }
+
+	public static function getBySlug( $slug ) {
+
+    	$entity = static::where('keyword', $slug)->first();
+
+    	return $entity->model::find($entity->entity_id);
+	}
 }

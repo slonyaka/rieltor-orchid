@@ -2,13 +2,13 @@
 
 namespace App\Orchid\Screens;
 
-use App\Models\RieltorObject;
+use App\Models\AgentObject;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
-class RieltorScreen extends Screen
+class AgentScreen extends Screen
 {
     /**
      * Display header name.
@@ -32,7 +32,7 @@ class RieltorScreen extends Screen
     public function query(): array
     {
 
-    	$objects = RieltorObject::where('user_id', Auth::user()->id)->paginate();
+    	$objects = AgentObject::where('user_id', Auth::user()->id)->paginate();
 
         return [
         	'objects' => $objects

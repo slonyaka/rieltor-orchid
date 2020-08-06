@@ -10,10 +10,10 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
-use App\Orchid\Screens\RieltorEditScreen;
-use App\Orchid\Screens\RieltorObjectEditScreen;
-use App\Orchid\Screens\RieltorScreen;
-use App\Orchid\Screens\RieltorSettings;
+use App\Orchid\Screens\AgentEditScreen;
+use App\Orchid\Screens\AgentObjectEditScreen;
+use App\Orchid\Screens\AgentScreen;
+use App\Orchid\Screens\AgentSettings;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Main
-Route::screen('/main', RieltorScreen::class)->name('platform.main');
+Route::screen('/main', AgentScreen::class)->name('platform.main');
 
 // Users...
 Route::screen('users/{users}/edit', UserEditScreen::class)->name('platform.systems.users.edit');
@@ -53,8 +53,8 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 
-Route::screen('/rieltor/{id}/edit', RieltorEditScreen::class)->name('platform.rieltor.edit');
-Route::screen('/rieltor/account', RieltorSettings::class)->name('platform.rieltor.account');
-Route::screen('/objects', RieltorScreen::class)->name('platform.rieltor');
-Route::screen('/object/create', RieltorObjectEditScreen::class)->name('platform.object.create');
-Route::screen('/object/{id}/edit', RieltorObjectEditScreen::class)->name('platform.object.edit');
+Route::screen('/rieltor/{id}/edit', AgentEditScreen::class)->name('platform.rieltor.edit');
+Route::screen('/rieltor/account', AgentSettings::class)->name('platform.rieltor.account');
+Route::screen('/objects', AgentScreen::class)->name('platform.rieltor');
+Route::screen('/object/create', AgentObjectEditScreen::class)->name('platform.object.create');
+Route::screen('/object/{id}/edit', AgentObjectEditScreen::class)->name('platform.object.edit');

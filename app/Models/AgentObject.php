@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Orchid\Presenters\RieltorObjectPresenter;
 use Illuminate\Database\Eloquent\Model;
 
-class RieltorObject extends Model
+class AgentObject extends Model
 {
     protected $table = 'objects';
 
@@ -32,6 +32,10 @@ class RieltorObject extends Model
 	    }
 
 	    return '';
+    }
 
+    public function getByUrlAlias($slug)
+    {
+    	return UrlAlias::getBySlug($slug);
     }
 }

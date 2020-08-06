@@ -4,7 +4,7 @@ namespace App\Orchid\Screens;
 
 use App\Models\ObjectImage;
 use App\Models\ObjectType;
-use App\Models\RieltorObject;
+use App\Models\AgentObject;
 use App\Models\UrlAlias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +19,7 @@ use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
-class RieltorObjectEditScreen extends Screen
+class AgentObjectEditScreen extends Screen
 {
     /**
      * Display header name.
@@ -41,12 +41,12 @@ class RieltorObjectEditScreen extends Screen
      *
      * @return array
      */
-    public function query(RieltorObject $object): array
+    public function query(AgentObject $object): array
     {
         $this->exists = $object->exists;
 
         if ($this->exists) {
-        	$urlAlias = UrlAlias::where(['model' => RieltorObject::class, 'entity_id' => $object->id])->first();
+        	$urlAlias = UrlAlias::where([ 'model' => AgentObject::class, 'entity_id' => $object->id])->first();
         }
 
         return [
@@ -174,7 +174,7 @@ class RieltorObjectEditScreen extends Screen
         ];
     }
 
-    public function save(RieltorObject $rieltorObject, Request $request)
+    public function save(AgentObject $rieltorObject, Request $request)
     {
 
     	$request->validate([
@@ -216,7 +216,7 @@ class RieltorObjectEditScreen extends Screen
 	    return redirect()->route('platform.rieltor');
     }
 
-	public function remove(RieltorObject $rieltorObject)
+	public function remove(AgentObject $rieltorObject)
 	{
 		ObjectImage::where('object_id', $rieltorObject->id)->delete();
 
@@ -227,7 +227,7 @@ class RieltorObjectEditScreen extends Screen
 		return redirect()->route('platform.rieltor');
 	}
 
-	private function saveSeoUrl(RieltorObject $rieltorObject, Request $request)
+	private function saveSeoUrl(AgentObject $rieltorObject, Request $request)
 	{
 
 		$objectData = $request->get('object');
@@ -243,7 +243,7 @@ class RieltorObjectEditScreen extends Screen
 		}
 
 		$data = [
-			'model' => RieltorObject::class,
+			'model' => AgentObject::class,
 			'entity_id' => $rieltorObject->id,
 			'keyword' => $keyword
 		];

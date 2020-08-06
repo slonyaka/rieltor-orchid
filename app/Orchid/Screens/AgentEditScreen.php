@@ -15,7 +15,7 @@ use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
-class RieltorEditScreen extends Screen
+class AgentEditScreen extends Screen
 {
     /**
      * Display header name.

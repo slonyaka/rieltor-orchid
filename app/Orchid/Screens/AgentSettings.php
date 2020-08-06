@@ -7,7 +7,7 @@ use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
-class RieltorSettings extends Screen
+class AgentSettings extends Screen
 {
     /**
      * Display header name.

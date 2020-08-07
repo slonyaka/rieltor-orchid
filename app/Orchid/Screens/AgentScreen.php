@@ -5,6 +5,7 @@ namespace App\Orchid\Screens;
 use App\Models\AgentObject;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
@@ -61,8 +62,22 @@ class AgentScreen extends Screen
     public function layout(): array
     {
 	    return [
-		    Layout::view('layouts.objects_grid')
+		    Layout::view('layouts.objects_grid'),
+		    Layout::modal('linkModals', [
+			    Layout::rows([
+					Input::make('url_alias')
+			    ]),
+		    ])->async('asyncGetObjectLink')
+		    ->withoutApplyButton()
 	    ];
 
     }
+
+	public function asyncGetObjectLink(AgentObject $object)
+	{
+		return [
+			'url_alias' => $object->getRoute()
+		];
+	}
+
 }

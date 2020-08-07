@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use App\Orchid\Presenters\RieltorObjectPresenter;
+use App\Traits\UrlAliasAccess;
 use Illuminate\Database\Eloquent\Model;
 
 class AgentObject extends Model
 {
+	use UrlAliasAccess;
+
     protected $table = 'objects';
 
     protected $fillable = [
@@ -24,18 +26,6 @@ class AgentObject extends Model
 	    'type_id'
     ];
 
-    public function getUrlAlias()
-    {
-    	$slug = UrlAlias::where(['model' => static::class, 'entity_id' => $this->id])->pluck('keyword')->first();
-    	if (!empty($slug)) {
-		    return route('object.view', ['slug' => $slug]);
-	    }
+    protected $route = 'object.view';
 
-	    return '';
-    }
-
-    public function getByUrlAlias($slug)
-    {
-    	return UrlAlias::getBySlug($slug);
-    }
 }

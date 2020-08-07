@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\UrlAlias;
 use App\Models\UserMeta;
 use App\User;
 use Illuminate\Http\Request;
@@ -131,10 +132,25 @@ class AgentEditScreen extends Screen
 
     	$userMeta = UserMeta::firstOrNew(['user_id' => $user->id]);
 
-    	var_dump($request->get('user_meta'));
-
 	    $userMeta->fill($request->get('user_meta'));
 	    $userMeta->save();
+
+	    $keyword = $user->id;
+
+	    if (!empty($userMeta->firstname) && !empty($userMeta->lastname)) {
+			$keyword .= '-'. UrlAlias::makeKeyword($userMeta->firstname .'-'. $userMeta->lastname);
+	    }
+
+	    $data = [
+		    'model' => User::class,
+		    'entity_id' => $user->id,
+		    'keyword' => $keyword
+	    ];
+
+	    $urlAlias = UrlAlias::firstOrNew(['model' => $data['model'], 'entity_id' => $data['entity_id']]);
+
+	    $urlAlias->fill($data);
+	    $urlAlias->save();
 
 	    Toast::info(__('Settings were saved.'));
 

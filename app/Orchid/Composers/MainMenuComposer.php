@@ -34,6 +34,11 @@ class MainMenuComposer
 
         // Main
         $this->dashboard->menu
+	        ->add(Menu::MAIN,
+		        ItemMenu::label('My page')
+		                ->icon('icon-monitor')
+		                ->route('agent.landing', ['slug' => Auth::user()->getUrlAlias()])
+	        )
             ->add(Menu::MAIN,
                 ItemMenu::label('My objects')
                     ->icon('icon-monitor')

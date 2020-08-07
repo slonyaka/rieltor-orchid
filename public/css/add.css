@@ -1,6 +1,7 @@
 .img-responsive {
     width: 100%;
     max-width: 100%;
+    height: auto !important;
 }
 
 
@@ -11,4 +12,9 @@
 
 .avatar-image-uploader {
     max-width: 450px;
+}
+
+.object-modal-link {
+    background: none;
+    border: 0;
 }

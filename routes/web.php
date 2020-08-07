@@ -21,3 +21,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/object/{slug}', 'LandingController@index')->name('object.view');
+Route::get('/agent/{slug}', 'AgentController@index')->name('agent.landing');

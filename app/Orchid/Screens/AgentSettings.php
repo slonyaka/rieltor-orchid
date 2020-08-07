@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\UrlAlias;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;
@@ -54,8 +56,13 @@ class AgentSettings extends Screen
      */
     public function commandBar(): array
     {
+    	$userSlug = UrlAlias::where(['model' => User::class, 'entity_id' => Auth::user()->id])->first();
 
         return [
+	        Link::make(__('View'))
+	            ->href(route('agent.landing', ['slug' => $userSlug->keyword]))
+	            ->icon('icon-eye'),
+
 	        Link::make(__('Edit'))
 	            ->href(route('platform.rieltor.edit', ['id' => Auth::user()->id]))
 	            ->icon('icon-pencil')

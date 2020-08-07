@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Models\UrlAlias;
+use App\Traits\UrlAliasAccess;
 use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
 {
+	use UrlAliasAccess;
     /**
      * The attributes that are mass assignable.
      *
@@ -70,6 +73,8 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    protected $route = 'agent.landing';
 
     public function meta()
     {

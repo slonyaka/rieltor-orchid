@@ -32,5 +32,18 @@
   "My settings" : "Мои настройки",
   "Phone" : "Телефон",
   "Company" : "Компания",
-  "Avatar" : "Аватар"
+  "Avatar" : "Аватар",
+  "My page" : "Моя страница",
+  "Edit account" : "Редактировать учетную запись",
+  "Profile image" : "Изображение профиля",
+  "Settings were saved." : "Настройки сохранены.",
+  "About me" : "Обо мне",
+  "Rooms" : "Комнат",
+  "Square" : "Площадь",
+  "Contact agent" : "Связаться с агентом",
+  "Your name" : "Ваше имя",
+  "Your phone" : "Ваш телефон",
+  "Your email" : "Ваш email",
+  "Submit" : "Отправить",
+  "rur." : "руб."
 }

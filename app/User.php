@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
 	    return $this->hasOne('App\Models\UserMeta');
     }
+
+    public function objects()
+    {
+    	return $this->hasMany('App\Models\AgentObject');
+    }
 }

@@ -22,6 +22,8 @@ class CreateUserMetasTable extends Migration
             $table->string('company')->nullable();
             $table->string('address')->nullable();
             $table->string('avatar')->nullable();
+            $table->string('profile_image')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

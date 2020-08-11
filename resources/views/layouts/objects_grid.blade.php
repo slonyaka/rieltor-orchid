@@ -8,7 +8,7 @@
                     </a>
                 </div>
                 <div class="name"><a href="{{ route('platform.object.edit', ['id' => $object->id]) }}">{{ $object->name }}</a></div>
-                <div class="price">@lang('Price'): {{ $object->price }} руб.</div>
+                <div class="price">@lang('Price'): {{ number_format($object->price) }}  {{ __('rur.') }}</div>
 
                 <div class="data small">
                     @lang('Floor'): {{ $object->floor }}

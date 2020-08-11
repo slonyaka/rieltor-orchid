@@ -13,6 +13,8 @@ class UserMeta extends Model
 	    'phone',
 	    'company',
 	    'address',
-	    'avatar'
+	    'avatar',
+	    'profile_image',
+	    'description'
     ];
 }

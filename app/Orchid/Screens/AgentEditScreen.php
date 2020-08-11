@@ -12,6 +12,8 @@ use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Picture;
+use Orchid\Screen\Fields\Quill;
+use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
@@ -109,9 +111,12 @@ class AgentEditScreen extends Screen
 		             ->title(__('Address'))
 		             ->placeholder(__('Address')),
 
-//		        Picture::make('user_meta.avatar')
-//			            ->class('avatar-image-uploader')
-//		               ->title(__('Avatar')),
+		        Quill::make('user_meta.description')
+		            ->title(__('About me')),
+
+		        Picture::make('user_meta.profile_image')
+			            ->class('avatar-image-uploader')
+		               ->title(__('Profile image')),
 
 		        Cropper::make('user_meta.avatar')
 			            ->class('avatar-image-uploader')

@@ -18,3 +18,143 @@
     background: none;
     border: 0;
 }
+
+.agent-top {
+    height: 450px;
+    -webkit-background-size: cover !important;
+    background-size: cover !important;
+    position: relative;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.agent-top h1 {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+}
+
+.agent-top:before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,.5);
+}
+
+.agent-info {
+
+    margin-top: -45px;
+    background: #ffffff;
+    position: relative;
+    z-index: 3;
+    box-shadow: 0 21px 15px -11px rgba(221, 221, 221, 0.35);
+}
+
+
+.agent-info .contact-form,
+.agent-info .details {
+    padding: 30px;
+}
+
+.agent-info .contact-form {
+    background: #f7f7f7;
+}
+
+.single-object {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    background: #ffffff;
+}
+
+.single-object .img-holder {
+    height: 225px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+
+.single-object .img-holder:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.25);
+}
+
+.single-object .img-holder img {
+    transition: 3s;
+}
+
+.single-object .img-holder:hover img {
+    transform: scale(1.2);
+}
+
+.single-object img {
+    min-height: 100%;
+}
+
+.single-object a{
+    color: #222222;
+    text-decoration: none;
+}
+
+.single-object a:hover {
+    opacity: .9;
+}
+
+.single-object h3 {
+    font-size: 20px;
+}
+
+.single-object .content {
+    padding: 15px;
+}
+
+.single-object .price{
+    color: #6449e7;
+    font-size: 18px;
+}
+.single-object .location {
+    color: #777777;
+}
+
+.single-object .location .icon {
+    color: #6449e7;
+}
+
+.single-object .features b {
+    color: #aaa;
+    font-weight: 400;
+}
+
+.single-object .features b + span {
+    color: #777;
+}
+
+.btn-primary {
+    background: #6449e7 !important;
+    border: 1px solid #6449e7 !important;
+}
+
+.form-control:focus,
+.btn:focus {
+    border: 1px solid #6449e780 !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:hover {
+    background: #5b43d0 !important;
+}

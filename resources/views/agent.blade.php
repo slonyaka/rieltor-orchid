@@ -59,9 +59,7 @@
     </div>
 
     <div class="container">
-        <div class="about-me pt-5 pb-3 mb-4 border-bottom">
-            <h2>{{ __('About me') }}</h2>
-        </div>
+        <h2 class="about-me pt-5 pb-3 mb-4 border-bottom">{{ __('About me') }}</h2>
 
         <div class="agent-content">
             {!! strip_tags($user->meta->description, '<p>') !!}

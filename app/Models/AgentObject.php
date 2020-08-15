@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\UrlAliasAccess;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Attachment\Attachable;
 
 class AgentObject extends Model
 {
@@ -27,5 +28,15 @@ class AgentObject extends Model
     ];
 
     protected $route = 'object.view';
+
+    public function user()
+    {
+    	return $this->belongsTo('App\User');
+    }
+
+    public function images()
+    {
+    	return $this->hasMany('App\Models\ObjectImage', 'object_id', 'id');
+    }
 
 }

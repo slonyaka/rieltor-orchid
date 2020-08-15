@@ -43,6 +43,8 @@ class UrlAlias extends Model
 
     	$entity = static::where('keyword', $slug)->first();
 
+    	//dd($slug);
+
     	return $entity->model::find($entity->entity_id);
 	}
 }

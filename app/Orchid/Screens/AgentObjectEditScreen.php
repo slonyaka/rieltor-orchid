@@ -6,8 +6,10 @@ use App\Models\ObjectImage;
 use App\Models\ObjectType;
 use App\Models\AgentObject;
 use App\Models\UrlAlias;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Orchid\Attachment\Models\Attachment;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Input;
@@ -45,13 +47,25 @@ class AgentObjectEditScreen extends Screen
     {
         $this->exists = $object->exists;
 
+	    $urlAlias = null;
+
         if ($this->exists) {
         	$urlAlias = UrlAlias::where([ 'model' => AgentObject::class, 'entity_id' => $object->id])->first();
         }
 
+        $images = new Collection();
+
+        if ($object->images->count()) {
+        	foreach ($object->images as $image) {
+        		$attachment = Attachment::find($image->path);
+		        $images->push($attachment);
+	        }
+        }
+
         return [
         	'object' => $object,
-	        'url_alias' => $urlAlias->keyword ?? ''
+	        'object.images' => $images,
+	        'url_alias' => (!empty($urlAlias)) ? $urlAlias->keyword : ''
         ];
     }
 
@@ -174,7 +188,7 @@ class AgentObjectEditScreen extends Screen
         ];
     }
 
-    public function save(AgentObject $rieltorObject, Request $request)
+    public function save(AgentObject $agentObject, Request $request)
     {
 
     	$request->validate([
@@ -189,25 +203,32 @@ class AgentObjectEditScreen extends Screen
 
     	$objectData = $request->get('object');
 
-	    $rieltorObject->fill(array_merge($objectData, ['user_id' => Auth::user()->id]));
-	    $rieltorObject->save();
+	    $agentObject->fill(array_merge($objectData, ['user_id' => Auth::user()->id]));
+	    $agentObject->save();
 
-	    $this->saveSeoUrl($rieltorObject, $request);
+	    $this->saveSeoUrl($agentObject, $request);
 
 	    if (!empty($objectData['images'])) {
 
-	    	ObjectImage::where('object_id', $rieltorObject->id)->delete();
+	    	ObjectImage::where('object_id', $agentObject->id)->delete();
+
+	    	$loaded = [];
 
 	    	foreach ($objectData['images'] as $image) {
+
+	    		if (in_array($image[0], $loaded)) {
+	    			continue;
+			    }
 
 				$objectImage = new ObjectImage();
 
 			    $objectImage->fill([
-			    	'object_id' => $rieltorObject->id,
+			    	'object_id' => $agentObject->id,
 				    'path' => $image[0]
 			    ]);
 
 			    $objectImage->save();
+			    $loaded[] = $image[0];
 		    }
 	    }
 
@@ -216,18 +237,19 @@ class AgentObjectEditScreen extends Screen
 	    return redirect()->route('platform.rieltor');
     }
 
-	public function remove(AgentObject $rieltorObject)
+	public function remove(AgentObject $agentObject)
 	{
-		ObjectImage::where('object_id', $rieltorObject->id)->delete();
+		ObjectImage::where('object_id', $agentObject->id)->delete();
+		UrlAlias::where('entity_id', $agentObject->id)->where('model', AgentObject::class)->delete();
 
-		$rieltorObject->delete();
+		$agentObject->delete();
 
 		Toast::info(__('Object was removed.'));
 
 		return redirect()->route('platform.rieltor');
 	}
 
-	private function saveSeoUrl(AgentObject $rieltorObject, Request $request)
+	private function saveSeoUrl(AgentObject $agentObject, Request $request)
 	{
 
 		$objectData = $request->get('object');
@@ -238,13 +260,13 @@ class AgentObjectEditScreen extends Screen
 			$keyword = UrlAlias::makeKeyword($objectData['name'] .'-'. $objectData['address']);
 	    }
 
-		if (UrlAlias::where('keyword', $keyword)->exists()) {
+		if (UrlAlias::where(['keyword' => $keyword])->where('entity_id', '!=', $agentObject->id)->where('model', AgentObject::class)->exists()) {
 			$keyword = $keyword .'-'. Auth::user()->id .'-'. time();
 		}
 
 		$data = [
 			'model' => AgentObject::class,
-			'entity_id' => $rieltorObject->id,
+			'entity_id' => $agentObject->id,
 			'keyword' => $keyword
 		];
 

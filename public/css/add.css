@@ -1,3 +1,7 @@
+.icon {
+    color: #6449e7;
+}
+
 .img-responsive {
     width: 100%;
     max-width: 100%;
@@ -48,8 +52,7 @@
 }
 
 .agent-info {
-
-    margin-top: -45px;
+    margin-top: -80px;
     background: #ffffff;
     position: relative;
     z-index: 3;
@@ -157,4 +160,50 @@
 .btn-primary:active,
 .btn-primary:hover {
     background: #5b43d0 !important;
+}
+
+.object-top {
+    height: 500px;
+    -webkit-background-size: cover !important;
+    background-size: cover !important;
+    position: relative;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.object-top h1 {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+}
+
+.object-top:before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,.5);
+}
+
+.object-top .address {
+    font-size: 18px;
+    color: #ffffff;
+    z-index: 2;
+    position: relative;
+}
+
+.object-top .right-content {
+    max-width: 320px;
+    background: rgba(255,255,255,.7);
+    padding: 25px;
+}
+
+.carousel-image {
+    height: 450px;
+    max-width: 100%;
 }

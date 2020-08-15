@@ -27,6 +27,8 @@ class CreateObjectsTable extends Migration
 	        $table->float('square_full')->nullable();
 	        $table->float('square_live')->nullable();
 	        $table->float('square_kitchen')->nullable();
+	        $table->string('street_view')->nullable();
+	        $table->string('youtube_link')->nullable();
 	        $table->string('type_id');
 	        $table->timestamps();
         });

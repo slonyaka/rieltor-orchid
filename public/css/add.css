@@ -163,7 +163,7 @@
 }
 
 .object-top {
-    height: 500px;
+    height: 600px;
     -webkit-background-size: cover !important;
     background-size: cover !important;
     position: relative;
@@ -197,13 +197,38 @@
     position: relative;
 }
 
+.object-top .price {
+    color: #ffffff;
+    font-size: 26px;
+    padding-top: 6px;
+}
+
 .object-top .right-content {
     max-width: 320px;
     background: rgba(255,255,255,.7);
     padding: 25px;
 }
 
+.object-top .right-content .agent a {
+    color: #222222;
+    text-decoration: none;
+}
+
+.object-top .right-content .agent a:hover {
+    opacity: .9;
+}
+
+.object-top .right-content .agent img {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
 .carousel-image {
     height: 450px;
     max-width: 100%;
+}
+
+.object-details-content p{
+    font-size: 30px;
 }

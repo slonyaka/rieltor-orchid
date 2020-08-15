@@ -24,6 +24,8 @@ class AgentObject extends Model
 	    'square_full',
 	    'square_live',
 	    'square_kitchen',
+	    'street_view',
+	    'youtube_link',
 	    'type_id'
     ];
 

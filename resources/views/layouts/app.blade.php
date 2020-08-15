@@ -79,6 +79,12 @@
         <main class="">
             @yield('content')
         </main>
+
+        <footer class="pt-5">
+            <div class="copy text-center">
+                Copyright 2020. Real Estate
+            </div>
+        </footer>
     </div>
 </body>
 </html>

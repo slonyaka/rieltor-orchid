@@ -181,6 +181,16 @@ class AgentObjectEditScreen extends Screen
 		             ->title(__('Kitchen square'))
 		             ->placeholder(__('Kitchen square')),
 
+		        Input::make('object.street_view')
+		             ->type('text')
+		             ->title(__('Street view link'))
+		             ->placeholder(__('Street view link')),
+
+		        Input::make('object.youtube_link')
+		             ->type('text')
+		             ->title(__('Youtube video'))
+		             ->placeholder(__('Youtube video link')),
+
 		        Input::make('url_alias')
 		             ->type('hidden')
 		             ->max(255),

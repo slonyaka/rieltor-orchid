@@ -17,4 +17,9 @@ class UserMeta extends Model
 	    'profile_image',
 	    'description'
     ];
+
+    public function full()
+    {
+    	return $this->firstname .' '. $this->lastname;
+    }
 }

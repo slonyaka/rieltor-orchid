@@ -1,3 +1,7 @@
+body {
+    background: #ffffff;
+}
+
 .icon {
     color: #6449e7;
 }
@@ -229,6 +233,71 @@
     max-width: 100%;
 }
 
+
+
+.obgect-page h2 {
+    font-size: 20px;
+    color: #696969;
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.obgect-page .object-details {
+    background: #f2f2f2;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.obgect-page .object-details h3 {
+    font-size: 20px;
+    color: #6449e7;
+}
+
 .object-details-content p{
-    font-size: 30px;
+    font-size: 40px;
+}
+
+.toggle-content {
+    position: relative;
+}
+
+.toggle-item {
+    transition: all 1s ease-out;
+    opacity: 0;
+}
+
+.toggle-item + .toggle-item {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.toggle-item.active {
+    opacity: 1;
+}
+
+.toggle-view {
+    opacity: 0;
+    transition-delay: 1s;
+    transition: all 2s ease-out;
+}
+
+.toggle-item.active .toggle-view {
+    opacity: 1;
+}
+
+.embed-toggler {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.embed-toggler.active {
+    opacity: 1;
 }

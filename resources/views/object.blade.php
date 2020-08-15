@@ -60,77 +60,98 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="object-description">
-            <h2 class="pt-5 pb-3 mb-4 border-bottom">{{ __('Description') }}</h2>
+    <div class="obgect-page">
+        <div class="container">
+            <div class="object-description">
+                <h2 class="pt-5 pb-3 mb-4">{{ __('Description') }}</h2>
 
-            <div class="object-content">
-                {!! strip_tags($object->description, '<p>') !!}
-            </div>
-        </div>
-
-        @if($images->count())
-        <div class="object-gallery">
-            <h2 class="pt-5 pb-3 mb-4 border-bottom">{{ __('Gallery') }}</h2>
-
-            <div class="object-gallery-content">
-                <div class="slick-carousel" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "dots": true, "arrows": false,"centerMode": true, "variableWidth": true, "infinite": true}'>
-                @foreach($images as $key => $image)
-                    <div>
-                        <img class="carousel-image" src="{{ $image->url }}" alt="{{$image->alt ?? $object->name }}">
-                    </div>
-                @endforeach
+                <div class="object-content">
+                    {!! strip_tags($object->description, '<p>') !!}
                 </div>
             </div>
-        </div>
-        @endif
-    </div>
 
-    <div class="container">
+            @if($images->count())
+                <div class="object-gallery">
+                    <h2 class="pt-5 pb-3 mb-4">{{ __('Gallery') }}</h2>
+
+                    <div class="object-gallery-content">
+                        <div class="slick-carousel" data-slick='{"slidesToShow": 1, "slidesToScroll": 1, "dots": true, "arrows": false,"centerMode": true, "variableWidth": true, "infinite": true}'>
+                            @foreach($images as $key => $image)
+                                <div>
+                                    <img class="carousel-image" src="{{ $image->url }}" alt="{{$image->alt ?? $object->name }}">
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+
         <div class="object-details">
-            <h2  class="pt-5 pb-3 mb-4 border-bottom">{{ __('Details') }}</h2>
+            <div class="container">
 
-            <div class="object-details-content">
-                <div class="row">
-                    <div class="col-sm-4 text-center py-4">
-                        <h3>{{__('Room count')}}</h3>
-                        <p>
-                            {{ $object->room_count }}
-                        </p>
-                    </div>
-                    <div class="col-sm-4 text-center py-4">
-                        <h3>{{__('Floor')}}</h3>
-                        <p>
-                            {{ $object->floor }}
-                        </p>
-                    </div>
-                    <div class="col-sm-4 text-center py-4">
-                        <h3>{{__('Full square')}}</h3>
-                        <p>
-                            {{ $object->square_full }} м<sup>2</sup>
-                        </p>
+                <h2  class="pt-5 pb-3 mb-4">{{ __('Details') }}</h2>
+
+                <div class="object-details-content">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-3 text-center py-4">
+                            <h3>{{__('Room count')}}</h3>
+                            <p>
+                                {{ $object->room_count }}
+                            </p>
+                        </div>
+                        <div class="col-sm-3 text-center py-4">
+                            <h3>{{__('Floor')}}</h3>
+                            <p>
+                                {{ $object->floor }}
+                            </p>
+                        </div>
+                        <div class="col-sm-3 text-center py-4">
+                            <h3>{{__('Full square')}}</h3>
+                            <p>
+                                {{ $object->square_full }} м<sup>2</sup>
+                            </p>
+                        </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+
+        <div class="embed-toggle">
+            <h2 class="header">
+                @if(!empty($object->street_view))
+                    <span class="embed-toggler active" data-toggle=".toggle-item-street-view">{{ __('Panorum') }}</span>
+                @endif
+                    @if(!empty($object->street_view) && !empty($object->youtube_link))
+                        /
+                    @endif
+                @if(!empty($object->youtube_link))
+                        <span class="embed-toggler @if(empty($object->street_view)) active @endif" data-toggle=".toggle-item-youtube">{{ __('Video') }}</span>
+                @endif
+            </h2>
+
+            <div class="toggle-content">
+                @if(!empty($object->street_view))
+                <div class="toggle-item toggle-item-street-view active">
+                    <div class="container py-5">
+                        <div class="toggle-view text-center">
+                            <iframe class="embed-responsive" src="{{ $object->street_view }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @if(!empty($object->youtube_link))
+                <div class="toggle-item toggle-item-youtube @if(empty($object->street_view)) active @endif">
+                    <div class="container py-5">
+                        <div class="toggle-view text-center">
+                            <iframe class="embed-responsive" src="{{ $object->youtube_link }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
-
-    @if(!empty($object->street_view))
-    <div class="container py-5">
-        <h2 class="pt-5 pb-3 mb-4 border-bottom">{{ __('Panorum') }}</h2>
-        <div class="street-view text-center">
-            <iframe class="embed-responsive" src="{{ $object->street_view }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-        </div>
-    </div>
-    @endif
-
-    @if(!empty($object->youtube_link))
-        <div class="container py-5">
-            <h2 class="pt-5 pb-3 mb-4 border-bottom">{{ __('Video') }}</h2>
-            <div class="street-view text-center">
-                <iframe class="embed-responsive" src="{{ $object->youtube_link }}" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-            </div>
-        </div>
-    @endif
 
 @endsection()

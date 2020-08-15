@@ -40289,6 +40289,19 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./components/slick */ "./resources/js/components/slick.js");
 
+$(document).ready(function () {
+  var embedToggler = $('.embed-toggler');
+  var toggleContent = $('.toggle-content');
+  embedToggler.on('click', function () {
+    var togllger = $(this);
+    var target = toggleContent.find(togllger.data('toggle'));
+    togllger.addClass('active');
+    togllger.siblings().removeClass('active');
+    target.addClass('active');
+    target.siblings().removeClass('active');
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

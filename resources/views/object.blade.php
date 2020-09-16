@@ -35,20 +35,17 @@
 
                     <h3>{{ __('Contact agent') }}</h3>
                     
-                    <form action="" method="post">
+                    <form action="" method="post" class="contact-form">
                         <div class="form-group">
-                            <label for="" class="form-label">{{ __('Your name') }}</label>
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="name" class="form-control" placeholder="{{ __('Your name') }}">
                         </div>
 
                         <div class="form-group">
-                            <label for="" class="form-label">{{ __('Your phone') }}</label>
-                            <input type="text" name="phone" class="form-control">
+                            <input type="text" name="phone" class="form-control" placeholder="{{ __('Your phone') }}">
                         </div>
 
                         <div class="form-group">
-                            <label for="" class="form-label">{{ __('Your email') }}</label>
-                            <input type="email" name="email" class="form-control">
+                            <input type="email" name="email" class="form-control" placeholder="{{ __('Your email') }}">
                         </div>
 
                         <div class="form-group text-center">
@@ -150,6 +147,59 @@
                     </div>
                 </div>
                 @endif
+            </div>
+        </div>
+
+        {{-- One bi contac section left part agent right part form --}}
+
+        <div class="contact-section py-5">
+            <div class="container">
+                <div class="object-agent-info">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="details col-sm-8 col-12">
+                                <div class="row">
+                                    <div class="avatar col-sm-4">
+                                        <img class="img-responsive" loading="lazy" width="500" height="500" src="{{ $object->user->meta->avatar }}" alt="{{ $object->user->meta->full() }}">
+                                    </div>
+                                    <div class="data col-sm-8">
+                                        <h3 class="full-name">
+                                            {{ $object->user->meta->full() }}
+                                        </h3>
+                                        <p class="email">
+                                            <b>{{ __('Email') }}:</b> {{ $object->user->email }}
+                                        </p>
+                                        <p class="phone">
+                                            <b>{{ __('Phone') }}:</b> {{ $object->user->meta->phone }}
+                                        </p>
+                                        <p class="company"><b>{{ __('Company') }}:</b> {{ $object->user->meta->company }}</p>
+                                        <p class="address"><b>{{ __('Address') }}:</b> {{ $object->user->meta->address }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact-form col-sm-4 col-12">
+                                <h3>{{ __('Contact agent') }}</h3>
+                                <form action="" method="post">
+                                    <div class="form-group">
+                                        <input type="text" name="name" class="form-control" placeholder="{{ __('Your name') }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="phone" class="form-control" placeholder="{{ __('Your phone') }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="email" name="email" class="form-control" placeholder="{{ __('Your email') }}">
+                                    </div>
+
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-primary" type="submit">{{ __('Submit') }}</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -34,18 +34,15 @@
                         <h3>{{ __('Contact agent') }}</h3>
                         <form action="" method="post">
                             <div class="form-group">
-                                <label for="" class="form-label">{{ __('Your name') }}</label>
-                                <input type="text" name="name" class="form-control">
+                                <input type="text" name="name" class="form-control" placeholder="{{ __('Your name') }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="" class="form-label">{{ __('Your phone') }}</label>
-                                <input type="text" name="phone" class="form-control">
+                                <input type="text" name="phone" class="form-control" placeholder="{{ __('Your phone') }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="" class="form-label">{{ __('Your email') }}</label>
-                                <input type="email" name="email" class="form-control">
+                                <input type="email" name="email" class="form-control" placeholder="{{ __('Your email') }}">
                             </div>
 
                             <div class="form-group text-center">

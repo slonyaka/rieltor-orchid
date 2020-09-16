@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Traits\UrlAliasAccess;
 use Illuminate\Database\Eloquent\Model;
-use Orchid\Attachment\Attachable;
+
 
 class AgentObject extends Model
 {

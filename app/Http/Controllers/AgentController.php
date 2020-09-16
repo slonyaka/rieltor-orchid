@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\UrlAlias;
-use App\User;
-use Illuminate\Http\Request;
 
 class AgentController extends Controller
 {
